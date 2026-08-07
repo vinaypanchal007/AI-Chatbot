@@ -1,0 +1,53 @@
+                        React Frontend
+                               │
+                               ▼
+                     FastAPI Backend
+                               │
+         ┌─────────────────────┴─────────────────────┐
+         │                                           │
+         ▼                                           ▼
+   General AI Chat                            Document Chat (RAG)
+         │                                           │
+         │                                    Upload Document
+         │                                           │
+         │                                           ▼
+         │                                 Document Processing
+         │                                           │
+         │      ┌──────────────┬──────────────┬──────────────┐
+         │      │              │              │              │
+         │     PDF           DOCX           TXT          Images
+         │      │              │              │              │
+         │      └──────────────┴──────────────┴──────────────┘
+         │                                           │
+         │                                   Extract Text
+         │                                           │
+         │                                      Clean Text
+         │                                           │
+         │                                      Chunk Text
+         │                                           │
+         │                                 Create Embeddings
+         │                                           │
+         │                                   Vector Database
+         │                                           │
+         └──────────────────────┬────────────────────┘
+                                ▼
+                        User Question
+                                │
+                    Documents Available?
+                                │
+                 ┌──────────────┴──────────────┐
+                 │                             │
+                No                            Yes
+                 │                             │
+                 ▼                             ▼
+           Groq LLM                  Retrieve Chunks
+                 │                             │
+                 └──────────────┬──────────────┘
+                                ▼
+                        Prompt Builder
+                                │
+                                ▼
+                           Groq API
+                                │
+                                ▼
+                      Response + Sources

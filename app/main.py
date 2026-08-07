@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routes.upload_routes import app as upload_routes
+from app.routes.chat_route import app as upload_routes
 
 app = FastAPI()
 
