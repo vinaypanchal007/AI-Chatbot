@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Form, File, UploadFile
 from typing import Optional
+from app.rag.pipeline import general_chat, rag_chat
 
 router = APIRouter()
 
