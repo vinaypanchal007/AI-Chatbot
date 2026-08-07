@@ -13,13 +13,11 @@ async def chat(
     file: Optional[UploadFile] = File(None)
 ):
     if file:
-        return {
-            "mode": "RAG",
-            "message": message,
-            "filename": file.filename,
-        }
+        return await rag_chat(
+            message = message, 
+            file = file
+        )
     else:
-        return {
-            "mode": "LLM",
-            "message": message,
-        }
+        return await general_chat(
+            message = message
+        )
