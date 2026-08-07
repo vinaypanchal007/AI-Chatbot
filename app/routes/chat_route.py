@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from typing import Optional
 
 router = APIRouter()
 
@@ -7,5 +8,18 @@ def home():
     return {"message": "Welcome to AI Chatbot"}
 
 @router.post("/chat")
-def chat():
-    return {"message": "Chat route is working", "status": "success"}
+async def chat(
+    message: str = Form(...),
+    file: Optional[UploadFile] = File(None)
+):
+    if file:
+        return {
+            "mode": "RAG",
+            "message": message,
+            "filename": file.filename,
+        }
+    else:
+        return {
+            "mode": "LLM",
+            "message": message,
+        }
