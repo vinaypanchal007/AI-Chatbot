@@ -1,10 +1,11 @@
-from fastapi import FastAPI
+from fastapi import APIRouter
 
-app = FastAPI()
+router = APIRouter()
 
-@app.post("/chat")
-def upload_file():
-    return {
-        "message":"File uploaded successfully",
-        "status":"success"
-    }
+@router.post("/")
+def home():
+    return {"message": "Welcome to AI Chatbot"}
+
+@router.post("/chat")
+def chat():
+    return {"message": "Chat route is working", "status": "success"}
