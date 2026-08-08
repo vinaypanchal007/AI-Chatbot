@@ -21,7 +21,7 @@ async def process_text(file: UploadFile) -> str:
 
 async def process_pdf(file: UploadFile) -> str:
     content = await file.read()
-    pdf = PdfReader(io.BytesIO(content))
+    pdf = PdfReader(BytesIO(content))
     text = ""
     
     for page in pdf.pages:
