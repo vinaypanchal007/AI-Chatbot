@@ -1,6 +1,8 @@
 from fastapi import UploadFile
 from pypdf import PdfReader
 from io import BytesIO
+from PIL import Image
+import pytesseract
 
 async def process_document(file: UploadFile) -> str:
     if file.content_type == "text/plain":
@@ -8,6 +10,9 @@ async def process_document(file: UploadFile) -> str:
     
     elif file.content_type == "application/pdf":
         return await process_pdf(file)
+    
+    elif file.content_type.startswith("image/"):
+        return await process_image(file)
     
     else:
         return ValueError("Unsupported file type. Please upload a text or PDF file.")
@@ -28,4 +33,16 @@ async def process_pdf(file: UploadFile) -> str:
         if page_text:
             text += page_text + "\n"
             
+    return text
+
+async def process_image(file: UploadFile) -> str:
+    content = await file.read()  
+    # Read the uploaded image as bytes
+
+    image = Image.open(BytesIO(content))  
+    # BytesIO wraps the bytes as a file-like object so Pillow can open the image
+
+    text = pytesseract.image_to_string(image)  
+    # Tesseract OCR analyzes the image pixels and extracts recognizable text
+
     return text
