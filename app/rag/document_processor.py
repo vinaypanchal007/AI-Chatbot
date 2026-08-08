@@ -1,7 +1,5 @@
-import io
-
 from fastapi import UploadFile
-from PyPDF2 import PdfReader
+from pypdf import PdfReader
 from io import BytesIO
 
 async def process_document(file: UploadFile) -> str:
