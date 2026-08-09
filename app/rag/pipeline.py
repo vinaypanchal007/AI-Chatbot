@@ -16,7 +16,7 @@ async def rag_chat(message: str, file: UploadFile):
     text = clean_text(text)
     chunks = chunk_text(text)
     embeddings = create_embeddings(chunks)
-    store_embeddings(embeddings)
+    store_embeddings(chunks,embeddings)
     return {
         "mode": "RAG",
         "message": message,
