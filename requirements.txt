@@ -5,3 +5,4 @@ pypdf
 pillow
 pytesseract
 sentence-transformers
+faiss-cpu
