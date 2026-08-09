@@ -1,5 +1,6 @@
 from fastapi import UploadFile
 from app.rag.document_processor import process_document
+from app.rag.chunker import chunk_text
 
 async def general_chat(message: str):
     return {
@@ -8,10 +9,9 @@ async def general_chat(message: str):
     }
 
 async def rag_chat(message: str, file: UploadFile):
-
     text = await process_document(file)
-
+    chunks = chunk_text(text)
     return {
         "message": message,
-        "document_text": text
+        "chunks": chunks
     }
