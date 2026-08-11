@@ -1,5 +1,5 @@
                          ┌──────────────────────┐
-                         │    React Frontend    │
+                         │    Vue Frontend      │
                          │                      │
                          │  Message + File      │
                          └──────────┬───────────┘
