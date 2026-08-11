@@ -9,9 +9,10 @@ from app.rag.prompt_builder import prompt_builder
 from app.rag.llm import generate_response
 
 async def general_chat(message: str):
+    response = await generate_response(message)
     return {
-        "mode" : "General Chat",
-        "response" : f"Received message: {message}"
+        "mode": "General Chat",
+        "response": response
     }
 
 async def rag_chat(message: str, file: UploadFile):
@@ -19,7 +20,7 @@ async def rag_chat(message: str, file: UploadFile):
     text = clean_text(text)
     chunks = chunk_text(text)
     embeddings = create_embeddings(chunks)
-    store_embeddings(chunks,embeddings)
+    store_embeddings(chunks, embeddings)
     relevant_chunks = retrieve_chunks(message)
     prompt = prompt_builder(message, relevant_chunks)
     response = await generate_response(prompt)

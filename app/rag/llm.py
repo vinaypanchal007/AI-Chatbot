@@ -1,5 +1,8 @@
 import os
+from dotenv import load_dotenv
 from groq import AsyncGroq
+
+load_dotenv()
 
 client = AsyncGroq(
     api_key = os.environ.get("GROQ_API_KEY")
@@ -7,7 +10,7 @@ client = AsyncGroq(
 
 async def generate_response(prompt: str) -> str:
     
-    response = await client.chat.completion.create(
+    response = await client.chat.completions.create(
         model = os.environ.get("GROQ_MODEL"),
         messages = [
             {
