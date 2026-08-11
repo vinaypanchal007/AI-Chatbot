@@ -97,4 +97,4 @@
                          │                   │
                          └─────────┬─────────┘
                                    ▼
-                              React Frontend
+                              Vue Frontend
