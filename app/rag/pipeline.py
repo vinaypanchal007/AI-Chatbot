@@ -6,6 +6,7 @@ from app.rag.embedding import create_embeddings
 from app.rag.vector_db import store_embeddings
 from app.rag.retriever import retrieve_chunks
 from app.rag.prompt_builder import prompt_builder
+from app.rag.llm import generate_response
 
 async def general_chat(message: str):
     return {
@@ -21,11 +22,10 @@ async def rag_chat(message: str, file: UploadFile):
     store_embeddings(chunks,embeddings)
     relevant_chunks = retrieve_chunks(message)
     prompt = prompt_builder(message, relevant_chunks)
+    response = await generate_response(prompt)
     return {
         "mode": "RAG",
         "message": message,
-        "chunks_count": len(chunks),
-        "embeddings_count": len(embeddings),
-        "relevant_chunks": relevant_chunks,
-        "prompt": prompt
+        "response": response,
+        "sources": relevant_chunks
     }
