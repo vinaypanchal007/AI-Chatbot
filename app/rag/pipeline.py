@@ -26,5 +26,6 @@ async def rag_chat(message: str, file: UploadFile):
         "message": message,
         "chunks_count": len(chunks),
         "embeddings_count": len(embeddings),
-        "relevant_chunks": relevant_chunks
+        "relevant_chunks": relevant_chunks,
+        "prompt": prompt
     }
