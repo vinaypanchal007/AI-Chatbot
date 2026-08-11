@@ -5,6 +5,7 @@ from app.rag.text_cleaner import clean_text
 from app.rag.embedding import create_embeddings
 from app.rag.vector_db import store_embeddings
 from app.rag.retriever import retrieve_chunks
+from app.rag.prompt_builder import prompt_builder
 
 async def general_chat(message: str):
     return {
@@ -19,6 +20,7 @@ async def rag_chat(message: str, file: UploadFile):
     embeddings = create_embeddings(chunks)
     store_embeddings(chunks,embeddings)
     relevant_chunks = retrieve_chunks(message)
+    prompt = prompt_builder(message, relevant_chunks)
     return {
         "mode": "RAG",
         "message": message,
