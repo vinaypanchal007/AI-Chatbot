@@ -4,6 +4,7 @@ from app.rag.chunker import chunk_text
 from app.rag.text_cleaner import clean_text
 from app.rag.embedding import create_embeddings
 from app.rag.vector_db import store_embeddings
+from app.rag.retriever import retrieve_chunks
 
 async def general_chat(message: str):
     return {
@@ -17,6 +18,7 @@ async def rag_chat(message: str, file: UploadFile):
     chunks = chunk_text(text)
     embeddings = create_embeddings(chunks)
     store_embeddings(chunks,embeddings)
+    relevant_chunks = retrieve_chunks(message)
     return {
         "mode": "RAG",
         "message": message,
