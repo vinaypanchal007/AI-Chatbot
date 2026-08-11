@@ -7,7 +7,7 @@ def retrieve_chunks(query: str, top_k: int= 3):
     query_embedding = create_embeddings([query])
     
     #search FAISS index for the top_k search results
-    distance, positions = index.search(
+    _, positions = index.search(
         query_embedding.astype('float32'),
         top_k
     )
