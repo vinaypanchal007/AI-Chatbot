@@ -1,20 +1,26 @@
 from app.rag.embedding import create_embeddings
-from app.rag.vector_db import store_embeddings
+from app.rag import vector_db
 
-def retrieve_chunks(query: str, top_k: int= 3):
-    #convert the user queries into vectors
+
+def retrieve_chunks(query: str, top_k: int = 3):
+    # Convert the user query into a vector
     query_embedding = create_embeddings([query])
-    
-    #search FAISS index for the top_k search results
-    _, positions = store_embeddings.index.search(
+
+    if vector_db.index is None:
+        raise ValueError(
+            "No document embeddings available for retrieval. Upload a file and try again."
+        )
+
+    # Search FAISS index for the top_k search results
+    _, positions = vector_db.index.search(
         query_embedding.astype('float32'),
         top_k
     )
-    
-    #gets the original chunks
+
+    # Get the original chunks
     results = []
     for pos in positions[0]:
         if pos != -1:
-            results.append(store_embeddings.chunk_store[pos])
-    
+            results.append(vector_db.chunk_store[pos])
+
     return results
