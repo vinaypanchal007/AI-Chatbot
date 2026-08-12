@@ -1,0 +1,116 @@
+.composer {
+  border-top: 1px solid var(--ink-line);
+  background: var(--ink-raised);
+  padding: 12px 20px 14px;
+}
+
+.staged {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  background: var(--ink);
+  border: 1px solid var(--ink-line);
+  border-radius: 2px;
+  padding: 5px 8px;
+  margin-bottom: 8px;
+  color: var(--paper-dim);
+}
+.pin {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--amber);
+  flex: none;
+}
+.staged-remove {
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.9rem;
+  line-height: 1;
+  padding: 0 2px;
+}
+.staged-remove:hover {
+  color: var(--danger);
+}
+
+.input-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.hidden-input {
+  display: none;
+}
+
+.attach-btn {
+  flex: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 2px;
+  border: 1px solid var(--ink-line);
+  background: var(--ink);
+  color: var(--paper-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.attach-btn:hover:not(:disabled) {
+  border-color: var(--amber);
+  color: var(--amber);
+}
+.attach-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.text-input {
+  flex: 1;
+  resize: none;
+  background: var(--ink);
+  border: 1px solid var(--ink-line);
+  border-radius: 2px;
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  padding: 9px 12px;
+  max-height: 160px;
+  line-height: 1.4;
+}
+.text-input:focus {
+  border-color: var(--amber);
+}
+.text-input::placeholder {
+  color: var(--muted);
+}
+
+.send-btn {
+  flex: none;
+  background: var(--amber);
+  color: #1c1300;
+  border: none;
+  border-radius: 2px;
+  padding: 10px 16px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.send-btn:hover:not(:disabled) {
+  background: #dd9c37;
+}
+.send-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.hint {
+  margin: 8px 2px 0;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--muted);
+}

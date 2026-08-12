@@ -1,0 +1,87 @@
+.shell {
+  display: flex;
+  height: 100vh;
+}
+
+.thread-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.thread {
+  flex: 1;
+  overflow-y: auto;
+  padding: 28px 24px 8px;
+  max-width: 880px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.empty {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+  color: var(--paper-dim);
+  padding: 20px 16px 28px;
+}
+.empty > * {
+  width: min(1100px, 100%);
+}
+.empty-mark {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  color: var(--amber);
+  margin-bottom: 8px;
+}
+.empty h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  margin: 0 0 8px;
+  color: var(--paper);
+}
+.empty p {
+  max-width: 380px;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.row.assistant.thinking .bubble {
+  background: var(--ink-raised);
+  border: 1px solid var(--ink-line);
+  display: flex;
+  gap: 5px;
+  padding: 14px 16px;
+}
+.dot-flash {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--muted);
+  animation: flash 1.1s infinite ease-in-out;
+}
+.dot-flash:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.dot-flash:nth-child(3) {
+  animation-delay: 0.3s;
+}
+@keyframes flash {
+  0%, 80%, 100% {
+    opacity: 0.25;
+  }
+  40% {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 720px) {
+  .shell {
+    flex-direction: column;
+  }
+}
