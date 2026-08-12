@@ -63,6 +63,7 @@ button {
   font-family: inherit;
 }
 
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.001ms !important;

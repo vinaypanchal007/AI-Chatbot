@@ -1,5 +1,7 @@
 <script setup>
-defineProps({
+import '../styles/message-bubble.css'
+
+const props = defineProps({
   role: { type: String, required: true }, // 'user' | 'assistant' | 'error'
   text: { type: String, required: true },
   mode: { type: String, default: null },
@@ -7,6 +9,22 @@ defineProps({
   fileName: { type: String, default: null },
   time: { type: String, default: '' }
 })
+
+function formatText(value) {
+  if (!value) return ''
+
+  return value
+    .replace(/\n{3,}/g, '<br><br>')
+    .replace(/\n/g, '<br>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/`(.+?)`/g, '<code>$1</code>')
+    .replace(/^(#{1,6})\s+(.*)$/gm, '<h$1>$2</h$1>')
+    .replace(/^\s*[-*]\s+(.*)$/gm, '<li>$1</li>')
+    .replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>')
+    .replace(/^(\d+\.\s+.*)$/gm, '<div class="numbered-item">$1</div>')
+    .replace(/\|/g, '<span class="pipe">|</span>')
+}
 </script>
 
 <template>
@@ -17,7 +35,7 @@ defineProps({
         <span class="attachment-name">{{ fileName }}</span>
       </div>
 
-      <p class="text">{{ text }}</p>
+      <div class="text" v-html="formatText(text)"></div>
 
       <div class="meta">
         <span v-if="mode" class="tag" :class="mode === 'RAG' ? 'tag-rag' : 'tag-general'">{{ mode }}</span>
@@ -40,158 +58,3 @@ defineProps({
   </div>
 </template>
 
-<style scoped>
-.row {
-  display: flex;
-  margin: 0 0 18px;
-}
-.row.user {
-  justify-content: flex-end;
-}
-.row.assistant,
-.row.error {
-  justify-content: flex-start;
-}
-
-.bubble {
-  max-width: min(640px, 82%);
-  padding: 14px 16px;
-  border-radius: 3px;
-  position: relative;
-  line-height: 1.55;
-}
-
-.row.user .bubble {
-  background: var(--vellum);
-  color: #1c1a13;
-  border-top-right-radius: 2px;
-}
-
-.row.assistant .bubble {
-  background: var(--ink-raised);
-  border: 1px solid var(--ink-line);
-  color: var(--paper);
-  border-top-left-radius: 2px;
-}
-
-.row.error .bubble {
-  background: rgba(185, 88, 63, 0.12);
-  border: 1px solid var(--danger);
-  color: var(--paper);
-}
-
-.text {
-  margin: 0;
-  font-size: 0.96rem;
-  white-space: pre-wrap;
-  word-break: break-word;
-}
-
-.attachment {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.02em;
-  margin-bottom: 8px;
-  padding-bottom: 8px;
-  border-bottom: 1px dashed rgba(0, 0, 0, 0.2);
-  opacity: 0.85;
-}
-.row.assistant .attachment {
-  border-bottom-color: var(--ink-line);
-}
-.pin {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--amber);
-  flex: none;
-}
-
-.meta {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 8px;
-}
-.tag {
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 2px 6px;
-  border-radius: 2px;
-}
-.tag-rag {
-  background: rgba(92, 143, 129, 0.18);
-  color: var(--verdigris);
-}
-.tag-general {
-  background: rgba(201, 138, 44, 0.16);
-  color: var(--amber);
-}
-.time {
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  color: var(--muted);
-}
-.row.user .time {
-  color: #6b6552;
-}
-
-.sources {
-  margin-top: 12px;
-  padding-top: 10px;
-  border-top: 1px dashed var(--ink-line);
-}
-.sources-label {
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--verdigris);
-  margin-bottom: 6px;
-}
-.cards {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.card {
-  background: var(--ink);
-  border: 1px solid var(--ink-line);
-  border-radius: 2px;
-}
-.card summary {
-  cursor: pointer;
-  list-style: none;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 7px 10px;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--paper-dim);
-}
-.card summary::-webkit-details-marker {
-  display: none;
-}
-.card-index {
-  color: var(--amber);
-}
-.card-hint {
-  color: var(--muted);
-}
-.card-body {
-  margin: 0;
-  padding: 0 10px 10px;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  line-height: 1.5;
-  color: var(--paper-dim);
-  white-space: pre-wrap;
-  word-break: break-word;
-}
-</style>
