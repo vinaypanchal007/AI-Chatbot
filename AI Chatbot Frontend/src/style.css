@@ -1,0 +1,72 @@
+:root {
+  /* -- palette -- */
+  --ink: #14181c;
+  --ink-raised: #1b2126;
+  --ink-line: #2c343a;
+  --paper: #ede7da;
+  --paper-dim: #cfc9bb;
+  --vellum: #e3dcc7;
+  --amber: #c98a2c;
+  --amber-soft: #7a5a2a;
+  --verdigris: #5c8f81;
+  --muted: #7c8388;
+  --danger: #b9583f;
+
+  /* -- type -- */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'SFMono-Regular', Menlo, monospace;
+
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--amber-soft);
+  color: var(--paper);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--ink-line);
+  border-radius: 6px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
+}
+
+button {
+  font-family: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
